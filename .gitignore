@@ -1,0 +1,15 @@
+# Local secrets and runtime credentials
+config/.env
+config/token.json
+config/oauth.json
+config/.token-oauth
+config/auth.json
+config/cookies.json
+
+# Python/runtime artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local test output
+*.log

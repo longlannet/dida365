@@ -1,0 +1,6 @@
+{
+  "access_token": "your_access_token",
+  "token_type": "bearer",
+  "scope": "tasks:read tasks:write",
+  "base_url": "https://api.dida365.com/open/v1"
+}
