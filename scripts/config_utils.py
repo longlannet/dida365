@@ -47,13 +47,29 @@ def _read_json(path: Path) -> dict:
 def load_oauth_config() -> dict:
     _load_dotenv()
     data = _read_json(OAUTH_CONFIG_FILE)
-    client_id = os.getenv("DIDA_CLIENT_ID") or data.get("client_id") or data.get("CLIENT_ID")
-    client_secret = os.getenv("DIDA_CLIENT_SECRET") or data.get("client_secret") or data.get("CLIENT_SECRET")
-    redirect_uri = os.getenv("DIDA_REDIRECT_URI") or data.get("redirect_uri") or DEFAULT_REDIRECT_URI
+    client_id = (
+        os.getenv("DIDA_CLIENT_ID")
+        or os.getenv("DIDA365_CLIENT_ID")
+        or data.get("client_id")
+        or data.get("CLIENT_ID")
+    )
+    client_secret = (
+        os.getenv("DIDA_CLIENT_SECRET")
+        or os.getenv("DIDA365_CLIENT_SECRET")
+        or data.get("client_secret")
+        or data.get("CLIENT_SECRET")
+    )
+    redirect_uri = (
+        os.getenv("DIDA_REDIRECT_URI")
+        or os.getenv("DIDA365_REDIRECT_URI")
+        or data.get("redirect_uri")
+        or DEFAULT_REDIRECT_URI
+    )
     if not client_id or not client_secret:
         raise SystemExit(
             "Missing Dida365 OAuth config. Set DIDA_CLIENT_ID/DIDA_CLIENT_SECRET "
-            "or create config/oauth.json with client_id/client_secret."
+            "or DIDA365_CLIENT_ID/DIDA365_CLIENT_SECRET, or create config/oauth.json "
+            "with client_id/client_secret."
         )
     return {"client_id": client_id, "client_secret": client_secret, "redirect_uri": redirect_uri}
 
@@ -61,11 +77,16 @@ def load_oauth_config() -> dict:
 def load_api_config() -> dict:
     _load_dotenv()
     data = _read_json(TOKEN_FILE)
-    access_token = os.getenv("DIDA_ACCESS_TOKEN") or data.get("access_token")
+    access_token = (
+        os.getenv("DIDA_ACCESS_TOKEN")
+        or os.getenv("DIDA365_ACCESS_TOKEN")
+        or data.get("access_token")
+    )
     base_url = os.getenv("DIDA_BASE_URL") or data.get("base_url") or DEFAULT_BASE_URL
     if not access_token:
         raise SystemExit(
-            f"Missing Dida365 access token. Put it in {TOKEN_FILE} or set DIDA_ACCESS_TOKEN."
+            f"Missing Dida365 access token. Put it in {TOKEN_FILE} or set "
+            "DIDA_ACCESS_TOKEN or DIDA365_ACCESS_TOKEN."
         )
     return {"access_token": access_token, "base_url": base_url.rstrip("/")}
 

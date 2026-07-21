@@ -1,17 +1,12 @@
 ---
-name: dida365
-description: Complete official Open API v1 integration for Dida365 (TickTick China). Covers every documented Task, Project, Focus, and Habit endpoint: create/list/get/update/delete/complete/move/filter tasks, projects, focus records, habits, and habit check-ins. Use when the user mentions Dida365, 滴答清单, TickTick China, tasks, todos, reminders, projects/lists, focus/pomodoro, or habits.
+name: "dida365"
+description: "Manage Dida365 (滴答清单 / TickTick China) tasks, projects, focus records, habits, and check-ins through Open API v1."
 homepage: https://github.com/longlannet/dida365
 metadata:
   openclaw:
     emoji: "✅"
     requires:
       bins: [python3]
-    install:
-      - id: dida365-python
-        kind: shell
-        script: scripts/install.sh
-        label: Install dida365 skill
 ---
 
 # Dida365 Skill
@@ -49,12 +44,11 @@ python3 scripts/exchange_token.py '<code>'
 ```
 
 OAuth config sources, in priority order:
-- `DIDA_CLIENT_ID`, `DIDA_CLIENT_SECRET`, optional `DIDA_REDIRECT_URI`
+- `DIDA_CLIENT_ID` (fallback `DIDA365_CLIENT_ID`), `DIDA_CLIENT_SECRET` (fallback `DIDA365_CLIENT_SECRET`), and optional `DIDA_REDIRECT_URI` (fallback `DIDA365_REDIRECT_URI`); values may come from the process environment or optional `config/.env`
 - `config/oauth.json` with `client_id`, `client_secret`, optional `redirect_uri`
-- optional `config/.env` with the same environment variable names
 
 Runtime API token sources:
-- `DIDA_ACCESS_TOKEN` + optional `DIDA_BASE_URL`
+- `DIDA_ACCESS_TOKEN` (fallback `DIDA365_ACCESS_TOKEN`) plus optional `DIDA_BASE_URL`; values may come from the process environment or optional `config/.env`
 - `config/token.json` with `access_token` and optional `base_url`
 
 Default API base: `https://api.dida365.com/open/v1`
