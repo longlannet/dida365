@@ -13,6 +13,8 @@ metadata:
 
 Use this skill to manage tasks, projects, focus, and habits through the official Dida365 Open API v1.
 
+Coverage includes creating, listing, retrieving, updating, deleting, completing, moving and filtering tasks, plus projects/lists, focus/pomodoro records, habits and habit check-ins. Use for Dida365, 滴答清单, TickTick China, todos and reminders.
+
 ## When to use
 
 Use this skill when the user wants:
